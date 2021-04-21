@@ -19,6 +19,7 @@ namespace Systems.ViewModels
         private ObservableCollection<UserEntity> _userses;
         private UserEntity _selectedUser;
         private SignInViewModel _sighInUser;
+        private RegistrationViewModel _registration;
         private DelegateCommand _addUserCommand;
         private AsyncRelayCommand _removeUserCommand;
         private DelegateCommand _signInUserCommand;
@@ -26,8 +27,11 @@ namespace Systems.ViewModels
         private DelegateCommand _changeEditModeCommand;
         private AsyncRelayCommand _reloadUserCommand;
 
-        public LoginAndRegistrationViewModel(ISystemOperations systemOperations, SignInViewModel signIn)
+        public LoginAndRegistrationViewModel(ISystemOperations systemOperations,
+                                             SignInViewModel signIn,
+                                             RegistrationViewModel registration)
         {
+            _registration = registration;
             _sighInUser = signIn;
             _systemOperations = systemOperations;
             Userses = new ObservableCollection<UserEntity>();
@@ -36,7 +40,7 @@ namespace Systems.ViewModels
                     .Wait();
         }
 
-        public DelegateCommand AddUserCommand => _addUserCommand ??= new DelegateCommand(OnAddUserCommandExecuted);
+        //public DelegateCommand AddUserCommand => _addUserCommand ??= new DelegateCommand(OnAddUserCommandExecuted);
         public DelegateCommand SignInCommand => _signInUserCommand ??= new DelegateCommand(OnSignInCommandExecuted);
 
         public AsyncRelayCommand RemoveUserCommand => _removeUserCommand ??= new AsyncRelayCommand(OnRemoveUserCommandExecuted,
@@ -76,21 +80,32 @@ namespace Systems.ViewModels
 
         private void OnChangeEditModeCommandExecuted() => IsEditMode = !IsEditMode;
 
-        private void OnAddUserCommandExecuted()
+        private bool OnAddUserCommandExecuted()
         {
-            Userses.Insert(0,
-                            new UserEntity(new User
-                                           {
-                                              Password = String.Empty,
-                                              Email = String.Empty
-                                           }));
+            if (Registration.Password == Registration.ConfirmPassword)
+            {
+                Userses.Insert(0,
+                               new UserEntity(new User
+                                              {
+                                                      Password = Registration.Password,
+                                                      Email = Registration.Email
+                                              }));
 
-            SelectedUser = Userses.First();
+                SelectedUser = Userses.First();
+
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Лох");
+
+                return false;
+            }
         }
 
-        #region SingInUser Property
+        #region SingInUser & Registration Property
 
-        public SignInViewModel SighInUsSighInUser
+        public SignInViewModel SighInUser
         {
             get
             {
@@ -99,11 +114,16 @@ namespace Systems.ViewModels
             set { SetProperty(ref _sighInUser, value); }
         }
 
+        public RegistrationViewModel Registration
+        {
+            get { return _registration; }
+            set { SetProperty(ref _registration, value); }
+        }
         #endregion
 
         private void OnSignInCommandExecuted()
         {
-            User user=_systemOperations.GetSignInUser(SighInUsSighInUser.Email, SighInUsSighInUser.Password);
+            User user=_systemOperations.GetSignInUser(SighInUser.Email, SighInUser.Password);
             if (user is null) MessageBox.Show("govno");
         }
         private async Task OnRemoveUserCommandExecuted()
@@ -118,12 +138,15 @@ namespace Systems.ViewModels
 
         private async Task OnApplyUserChangesCommandExecuted()
         {
-            if (SelectedUser.Entity.Id == 0)
-                await _systemOperations.AddUserAsync(SelectedUser.Entity);
-            else
-                await _systemOperations.UpdateUserAsync(SelectedUser.Entity);
+            if (OnAddUserCommandExecuted())
+            {
+                if (SelectedUser.Entity.Id == 0)
+                    await _systemOperations.AddUserAsync(SelectedUser.Entity);
+                else
+                    await _systemOperations.UpdateUserAsync(SelectedUser.Entity);
 
-            await ReloadUsersAsync();
+                await ReloadUsersAsync();
+            }
         }
 
         private async Task ReloadUsersAsync()

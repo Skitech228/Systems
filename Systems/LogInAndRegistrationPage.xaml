@@ -267,7 +267,7 @@
                 </Border>
             </Grid>
         </GroupBox>
-        <!--<GroupBox Style="{DynamicResource GroupBoxStyle1}" Grid.Row="1" Grid.ColumnSpan="4" 
+        <GroupBox Style="{DynamicResource GroupBoxStyle1}" Grid.Row="1" Grid.ColumnSpan="4" 
                   Grid.RowSpan="7">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -297,19 +297,19 @@
                         FontSize="20"
                         VerticalAlignment="Center" HorizontalAlignment="Center"
                         Height="35" Width="150"
-                        Command="{Binding SystemOperationsContext.AddUserCommand, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+                        Command="{Binding SystemOperationsContext.ApplyUserChangesCommand, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Email"
                          Grid.ColumnSpan="2" Grid.RowSpan="2"
                          VerticalAlignment="Center" HorizontalAlignment="Center"
                          Height="35" Width="175" 
                          TextAlignment="Center"
                          FontSize="25"/>
-                <TextBlock Grid.Column="2" Grid.Row="0" Text="Login"
-                           Grid.ColumnSpan="2" Grid.RowSpan="2"
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="Password Confirmation"
+                           Grid.ColumnSpan="3" Grid.RowSpan="2"
                            VerticalAlignment="Center" HorizontalAlignment="Center"
-                           Height="35" Width="175"
+                           Height="25" Width="200"
                            TextAlignment="Center"
-                           FontSize="25" />
+                           FontSize="19" />
                 <Border
                     Grid.Column="0" Grid.Row="1"
                     Grid.ColumnSpan="2" Grid.RowSpan="2"
@@ -322,11 +322,11 @@
                     <TextBox Style="{DynamicResource TextBoxStyle1}" VerticalAlignment="Center" HorizontalAlignment="Center"
                          Height="35" Width="175"
                          FontSize="25"
-                         Text="{Binding SystemOperationsContext.SelectedUser.Entity.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                         Text="{Binding SystemOperationsContext.Registration.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                 </Border>
                 <Border
-                    Grid.Column="2" Grid.Row="1"
-                    Grid.ColumnSpan="2" Grid.RowSpan="2"
+                    Grid.Column="1" Grid.Row="2"
+                    Grid.ColumnSpan="3" Grid.RowSpan="2"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     CornerRadius="10 10 10 10"
                     BorderThickness="1"
@@ -337,16 +337,16 @@
                              HorizontalAlignment="Center"
                              Height="35" Width="175"
                              FontSize="25"
-                             Text="{Binding SystemOperationsContext.SelectedUser.Entity.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                             Text="{Binding SystemOperationsContext.Registration.ConfirmPassword, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                 </Border>
-                <TextBlock Grid.Column="1" Grid.Row="2" Text="Password"
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Password"
                            Grid.ColumnSpan="2" Grid.RowSpan="2"
                            VerticalAlignment="Center" HorizontalAlignment="Center"
                            Height="35" Width="175"
                            TextAlignment="Center"
                            FontSize="25" />
                 <Border
-                    Grid.Column="1" Grid.Row="3"
+                    Grid.Column="0" Grid.Row="3"
                     Grid.ColumnSpan="2" Grid.RowSpan="2"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     CornerRadius="10 10 10 10"
@@ -357,9 +357,9 @@
                     <TextBox VerticalAlignment="Center" HorizontalAlignment="Center"
                          Height="35" Width="175"
                          FontSize="25" Style="{DynamicResource TextBoxStyle1}"
-                         Text="{Binding SystemOperationsContext.SelectedUser.Entity.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+                         Text="{Binding SystemOperationsContext.Registration.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
                 </Border>
             </Grid>
-        </GroupBox>-->
+        </GroupBox>
     </Grid>
 </Window>

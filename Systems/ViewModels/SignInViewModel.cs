@@ -12,6 +12,28 @@ namespace Systems.ViewModels
 {
     public class SignInViewModel:BindableBase
     {
+
+        #region Active Property
+
+        /// <summary>
+        /// Private member backing variable for <see cref="Active" />
+        /// </summary>
+        private bool _active = true;
+
+        /// <summary>
+        /// Gets and sets The property's value
+        /// </summary>
+        public bool Active
+        {
+            get
+            {
+                return _active;
+            }
+            set { SetProperty(ref _active, value); }
+        }
+
+        #endregion
+
         #region Password Property
 
         private String _login = null;
