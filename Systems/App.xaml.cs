@@ -1,17 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿#region Using derectives
+
 using System.Windows;
+using Systems.Models;
+using Systems.Operations.Intefases;
+using Systems.Operations.Realization;
+using Systems.ViewModels.Pages;
+using Prism.Ioc;
+using Prism.Unity;
+
+#endregion
 
 namespace Systems
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
+        #region Overrides of PrismApplicationBase
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.RegisterSingleton<ServiceContext>(() =>
+                                                              {
+                                                                  var context = new ServiceContext();
+
+                                                                  return context;
+                                                              });
+
+            containerRegistry.RegisterScoped<ISystemOperations, SystemOperations>();
+
+            containerRegistry.RegisterForNavigation<LogInAndRegistrationPage, LogInAndRegistrationPageViewModel>("AdministratorPage");
+        }
+        protected override Window CreateShell() => Container.Resolve<LogInAndRegistrationPage>();
+        #endregion
     }
 }
