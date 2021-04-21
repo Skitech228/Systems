@@ -14,7 +14,7 @@ namespace Systems.Models
             Database.EnsureCreated();
         }
 
-        public DbSet<User> Users;
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

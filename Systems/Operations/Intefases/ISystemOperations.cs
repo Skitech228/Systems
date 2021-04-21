@@ -8,15 +8,15 @@ using Systems.Models;
 namespace Systems.Operations.Intefases
 {
     public interface ISystemOperations
-    {
-        public Task<bool> AddUserAsync(User user);
+    { 
+        Task<bool> AddUserAsync(User user);
 
-        public Task<bool> RemoveUserAsync(User customer);
+         Task<bool> RemoveUserAsync(User customer);
 
-        public Task<bool> UpdateUserAsync(User user);
+         Task<bool> UpdateUserAsync(User user);
 
-        public Task<User> GetByIdAsync(int id);
+         Task<User> GetByIdAsync(int id);
 
-        public Task<IEnumerable<User>> GetAllUsersAsync();
+         Task<IEnumerable<User>> GetAllUsersAsync();
     }
 }

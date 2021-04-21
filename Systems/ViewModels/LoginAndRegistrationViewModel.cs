@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using Systems.Models;
 using Systems.Models.Entitys;
 using Systems.Operations.Intefases;
@@ -15,10 +16,12 @@ namespace Systems.ViewModels
     {
         private readonly ISystemOperations _systemOperations;
         private bool _isEditMode;
-        private ObservableCollection<UserEntity> _users;
+        private ObservableCollection<UserEntity> _userses;
         private UserEntity _selectedUser;
+        private SignInViewModel _sighInUser;
         private DelegateCommand _addUserCommand;
         private AsyncRelayCommand _removeUserCommand;
+        private DelegateCommand _signInUserCommand;
         private AsyncRelayCommand _applyUserChangesCommand;
         private DelegateCommand _changeEditModeCommand;
         private AsyncRelayCommand _reloadUserCommand;
@@ -26,13 +29,14 @@ namespace Systems.ViewModels
         public LoginAndRegistrationViewModel(ISystemOperations systemOperations)
         {
             _systemOperations = systemOperations;
-            Users = new ObservableCollection<UserEntity>();
+            Userses = new ObservableCollection<UserEntity>();
 
             ReloadUsersAsync()
                     .Wait();
         }
 
         public DelegateCommand AddUserCommand => _addUserCommand ??= new DelegateCommand(OnAddUserCommandExecuted);
+        public DelegateCommand SignInCommand => _signInUserCommand ??= new DelegateCommand(OnSignInCommandExecuted);
 
         public AsyncRelayCommand RemoveUserCommand => _removeUserCommand ??= new AsyncRelayCommand(OnRemoveUserCommandExecuted,
                                                                                                        CanManipulateOnUser);
@@ -45,10 +49,10 @@ namespace Systems.ViewModels
 
         public AsyncRelayCommand ReloadUsersCommand => _reloadUserCommand ??= new AsyncRelayCommand(ReloadUsersAsync);
 
-        public ObservableCollection<UserEntity> Users
+        public ObservableCollection<UserEntity> Userses
         {
-            get => _users;
-            set => SetProperty(ref _users, value);
+            get => _userses;
+            set => SetProperty(ref _userses, value);
         }
 
         public UserEntity SelectedUser
@@ -73,23 +77,50 @@ namespace Systems.ViewModels
 
         private void OnAddUserCommandExecuted()
         {
-            Users.Insert(0,
+            Userses.Insert(0,
                             new UserEntity(new User
                                            {
                                               Password = String.Empty,
                                               Email = String.Empty
                                            }));
 
-            SelectedUser = Users.First();
+            SelectedUser = Userses.First();
         }
 
+        #region SingInUser Property
+
+        public SignInViewModel SighInUsSighInUser
+        {
+            get
+            {
+                return _sighInUser;
+            }
+            set { SetProperty(ref _sighInUser, value); }
+        }
+
+        #endregion
+
+        private void OnSignInCommandExecuted()
+        {
+            UserEntity _entity = new UserEntity(new User()
+                                                {
+                                                        Email = SighInUsSighInUser.Email,
+                                                        Password = SighInUsSighInUser.Password
+                                                });
+            if (Userses.Contains(_entity))
+                MessageBox.Show("Помянем");
+            else
+            {
+                MessageBox.Show("F");
+            }
+        }
         private async Task OnRemoveUserCommandExecuted()
         {
             if (SelectedUser.Entity.Id == 0)
-                Users.Remove(SelectedUser);
+                Userses.Remove(SelectedUser);
 
             await _systemOperations.RemoveUserAsync(SelectedUser.Entity);
-            Users.Remove(SelectedUser);
+            Userses.Remove(SelectedUser);
             SelectedUser = null;
         }
 
@@ -106,10 +137,10 @@ namespace Systems.ViewModels
         private async Task ReloadUsersAsync()
         {
             var dbPreOrders = await _systemOperations.GetAllUsersAsync();
-            Users.Clear();
+            Userses.Clear();
 
             foreach (var preOrder in dbPreOrders)
-                Users.Add(new UserEntity(preOrder));
+                Userses.Add(new UserEntity(preOrder));
         }
     }
 }

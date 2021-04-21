@@ -224,7 +224,7 @@
                         FontSize="20"
                         VerticalAlignment="Center" HorizontalAlignment="Center"
                         Height="35" Width="150"
-                        Command="{Binding SystemOperationsContext.AddUserCommand, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+                        Command="{Binding SystemOperationsContext.SignInCommand, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Column="1" Grid.Row="0" Text="Email"
                          Grid.ColumnSpan="2" Grid.RowSpan="2"
                          VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -243,7 +243,7 @@
                     <TextBox Style="{DynamicResource TextBoxStyle1}" VerticalAlignment="Center" HorizontalAlignment="Center"
                          Height="35" Width="175"
                          FontSize="25"
-                         Text="{Binding SystemOperationsContext.SelectedUser.Entity.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                         Text="{Binding SystemOperationsContext.SighInUsSighInUser.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                 </Border>
                 <TextBlock Grid.Column="1" Grid.Row="2" Text="Password"
                            Grid.ColumnSpan="2" Grid.RowSpan="2"
@@ -263,7 +263,7 @@
                     <TextBox VerticalAlignment="Center" HorizontalAlignment="Center"
                          Height="35" Width="175"
                          FontSize="25" Style="{DynamicResource TextBoxStyle1}"
-                         Text="{Binding SystemOperationsContext.SelectedUser.Entity.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+                         Text="{Binding SystemOperationsContext.SighInUsSighInUser.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
                 </Border>
             </Grid>
         </GroupBox>
