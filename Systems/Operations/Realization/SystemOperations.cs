@@ -15,6 +15,8 @@ namespace Systems.Operations.Realization
 
         public SystemOperations(ServiceContext context) => _context = context;
 
+        public User GetSignInUser(string email, string password) => _context.Users.FirstOrDefault(x => x.Email == email && x.Password == password);
+
         public async Task<bool> AddUserAsync(User user)
         {
             _context.Users.Add(user);
@@ -42,6 +44,5 @@ namespace Systems.Operations.Realization
 
         public async Task<IEnumerable<User>> GetAllUsersAsync() => await _context.Users
                                                                            .ToListAsync();
-
     }
 }

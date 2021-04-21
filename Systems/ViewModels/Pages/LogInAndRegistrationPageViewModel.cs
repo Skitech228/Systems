@@ -15,9 +15,9 @@ namespace Systems.ViewModels.Pages
     public class LogInAndRegistrationPageViewModel: BindableBase
     {
 
-        public LogInAndRegistrationPageViewModel(ISystemOperations _systemOperations)
+        public LogInAndRegistrationPageViewModel(ISystemOperations _systemOperations,SignInViewModel sign)
         {
-            SystemOperationsContext = new LoginAndRegistrationViewModel(_systemOperations);
+            SystemOperationsContext = new LoginAndRegistrationViewModel(_systemOperations,sign);
         }
 
 

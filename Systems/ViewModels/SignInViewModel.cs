@@ -21,9 +21,6 @@ namespace Systems.ViewModels
         {
             get
             {
-                if (_login == null)
-                { _login = String.Empty; }
-
                 return _login;
             }
             set { SetProperty(ref _login, value); }
@@ -45,9 +42,6 @@ namespace Systems.ViewModels
         {
             get
             {
-                if (_email == null)
-                { _email = String.Empty; }
-
                 return _email;
             }
             set { SetProperty(ref _email, value); }

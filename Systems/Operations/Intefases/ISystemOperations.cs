@@ -15,7 +15,7 @@ namespace Systems.Operations.Intefases
 
          Task<bool> UpdateUserAsync(User user);
 
-         Task<User> GetByIdAsync(int id);
+         User GetSignInUser(string email, string password);
 
          Task<IEnumerable<User>> GetAllUsersAsync();
     }

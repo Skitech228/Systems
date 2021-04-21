@@ -26,8 +26,9 @@ namespace Systems.ViewModels
         private DelegateCommand _changeEditModeCommand;
         private AsyncRelayCommand _reloadUserCommand;
 
-        public LoginAndRegistrationViewModel(ISystemOperations systemOperations)
+        public LoginAndRegistrationViewModel(ISystemOperations systemOperations, SignInViewModel signIn)
         {
+            _sighInUser = signIn;
             _systemOperations = systemOperations;
             Userses = new ObservableCollection<UserEntity>();
 
@@ -102,17 +103,8 @@ namespace Systems.ViewModels
 
         private void OnSignInCommandExecuted()
         {
-            UserEntity _entity = new UserEntity(new User()
-                                                {
-                                                        Email = SighInUsSighInUser.Email,
-                                                        Password = SighInUsSighInUser.Password
-                                                });
-            if (Userses.Contains(_entity))
-                MessageBox.Show("Помянем");
-            else
-            {
-                MessageBox.Show("F");
-            }
+            User user=_systemOperations.GetSignInUser(SighInUsSighInUser.Email, SighInUsSighInUser.Password);
+            if (user is null) MessageBox.Show("govno");
         }
         private async Task OnRemoveUserCommandExecuted()
         {
