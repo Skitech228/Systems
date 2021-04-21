@@ -10,9 +10,9 @@ namespace Systems.Models
     public class User
     {
         [Key]
-        public int Id;
+        public int Id { get; set; }
 
-        public string Password;
-        public string Email;
+        public string Password { get; set; }
+        public string Email { get; set; }
     }
 }

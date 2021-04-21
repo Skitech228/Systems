@@ -4,7 +4,7 @@ using System;
 
 #endregion
 
-namespace SQL.Extensions
+namespace Systems.Extensions
 {
     public interface IErrorHandler
     {

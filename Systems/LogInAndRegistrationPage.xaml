@@ -267,7 +267,7 @@
                 </Border>
             </Grid>
         </GroupBox>
-        <GroupBox Style="{DynamicResource GroupBoxStyle1}" Grid.Row="1" Grid.ColumnSpan="4" 
+        <!--<GroupBox Style="{DynamicResource GroupBoxStyle1}" Grid.Row="1" Grid.ColumnSpan="4" 
                   Grid.RowSpan="7">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -360,6 +360,6 @@
                          Text="{Binding SystemOperationsContext.SelectedUser.Entity.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
                 </Border>
             </Grid>
-        </GroupBox>
+        </GroupBox>-->
     </Grid>
 </Window>

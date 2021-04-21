@@ -7,7 +7,7 @@ using Systems.Models.Entitys;
 using Systems.Operations.Intefases;
 using Prism.Commands;
 using Prism.Mvvm;
-using SQL.AsyncCommands;
+using Systems.AsyncCommands;
 
 namespace Systems.ViewModels
 {

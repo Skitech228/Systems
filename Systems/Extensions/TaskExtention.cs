@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 #endregion
 
-namespace SQL.Extensions
+namespace Systems.Extensions
 {
     public static class TaskExtension
     {

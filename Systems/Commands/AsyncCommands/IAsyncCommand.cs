@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 #endregion
 
-namespace SQL.AsyncCommands
+namespace Systems.AsyncCommands
 {
     internal interface IAsyncCommand : ICommand
     {

@@ -3,11 +3,11 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using SQL.Extensions;
+using Systems.Extensions;
 
 #endregion
 
-namespace SQL.AsyncCommands
+namespace Systems.AsyncCommands
 {
     public class AsyncRelayCommand : IAsyncCommand
     {
