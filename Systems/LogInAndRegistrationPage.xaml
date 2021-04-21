@@ -243,7 +243,7 @@
                     <TextBox Style="{DynamicResource TextBoxStyle1}" VerticalAlignment="Center" HorizontalAlignment="Center"
                          Height="35" Width="175"
                          FontSize="25"
-                         Text="{Binding SystemOperationsContext.SighInUsSighInUser.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                         Text="{Binding SystemOperationsContext.SighInUser.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                 </Border>
                 <TextBlock Grid.Column="1" Grid.Row="2" Text="Password"
                            Grid.ColumnSpan="2" Grid.RowSpan="2"
@@ -263,11 +263,11 @@
                     <TextBox VerticalAlignment="Center" HorizontalAlignment="Center"
                          Height="35" Width="175"
                          FontSize="25" Style="{DynamicResource TextBoxStyle1}"
-                         Text="{Binding SystemOperationsContext.SighInUsSighInUser.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+                         Text="{Binding SystemOperationsContext.SighInUser.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
                 </Border>
             </Grid>
         </GroupBox>
-        <GroupBox Style="{DynamicResource GroupBoxStyle1}" Grid.Row="1" Grid.ColumnSpan="4" 
+        <!--<GroupBox Style="{DynamicResource GroupBoxStyle1}" Grid.Row="1" Grid.ColumnSpan="4" 
                   Grid.RowSpan="7">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -360,6 +360,6 @@
                          Text="{Binding SystemOperationsContext.Registration.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
                 </Border>
             </Grid>
-        </GroupBox>
+        </GroupBox>-->
     </Grid>
 </Window>
