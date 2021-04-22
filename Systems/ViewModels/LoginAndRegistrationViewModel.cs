@@ -16,11 +16,12 @@ namespace Systems.ViewModels
     {
         private readonly ISystemOperations _systemOperations;
         private bool _isEditMode;
-        private ObservableCollection<UserEntity> _userses;
+        private ObservableCollection<UserEntity> _users;
         private UserEntity _selectedUser;
         private SignInViewModel _sighInUser;
         private RegistrationViewModel _registration;
         private DelegateCommand _addUserCommand;
+        private DelegateCommand _navigationCommand;
         private AsyncRelayCommand _removeUserCommand;
         private DelegateCommand _signInUserCommand;
         private AsyncRelayCommand _applyUserChangesCommand;
@@ -34,7 +35,7 @@ namespace Systems.ViewModels
             _registration = registration;
             _sighInUser = signIn;
             _systemOperations = systemOperations;
-            Userses = new ObservableCollection<UserEntity>();
+            Users = new ObservableCollection<UserEntity>();
 
             ReloadUsersAsync()
                     .Wait();
@@ -42,6 +43,7 @@ namespace Systems.ViewModels
 
         //public DelegateCommand AddUserCommand => _addUserCommand ??= new DelegateCommand(OnAddUserCommandExecuted);
         public DelegateCommand SignInCommand => _signInUserCommand ??= new DelegateCommand(OnSignInCommandExecuted);
+        public DelegateCommand NavigationCommand => _navigationCommand ??= new DelegateCommand(OnSignInCommandExecuted);
 
         public AsyncRelayCommand RemoveUserCommand => _removeUserCommand ??= new AsyncRelayCommand(OnRemoveUserCommandExecuted,
                                                                                                        CanManipulateOnUser);
@@ -54,10 +56,10 @@ namespace Systems.ViewModels
 
         public AsyncRelayCommand ReloadUsersCommand => _reloadUserCommand ??= new AsyncRelayCommand(ReloadUsersAsync);
 
-        public ObservableCollection<UserEntity> Userses
+        public ObservableCollection<UserEntity> Users
         {
-            get => _userses;
-            set => SetProperty(ref _userses, value);
+            get => _users;
+            set => SetProperty(ref _users, value);
         }
 
         public UserEntity SelectedUser
@@ -84,20 +86,20 @@ namespace Systems.ViewModels
         {
             if (Registration.Password == Registration.ConfirmPassword)
             {
-                Userses.Insert(0,
+                Users.Insert(0,
                                new UserEntity(new User
                                               {
                                                       Password = Registration.Password,
                                                       Email = Registration.Email
                                               }));
 
-                SelectedUser = Userses.First();
+                SelectedUser = Users.First();
 
                 return true;
             }
             else
             {
-                MessageBox.Show("Лох");
+                MessageBox.Show("Passwords don't match");
 
                 return false;
             }
@@ -124,15 +126,21 @@ namespace Systems.ViewModels
         private void OnSignInCommandExecuted()
         {
             User user=_systemOperations.GetSignInUser(SighInUser.Email, SighInUser.Password);
-            if (user is null) MessageBox.Show("govno");
+            if (user is null) 
+                MessageBox.Show("Email or password isn't correct");
+            else
+            {
+                MessageBox.Show("Success");
+            }
         }
+
         private async Task OnRemoveUserCommandExecuted()
         {
             if (SelectedUser.Entity.Id == 0)
-                Userses.Remove(SelectedUser);
+                Users.Remove(SelectedUser);
 
             await _systemOperations.RemoveUserAsync(SelectedUser.Entity);
-            Userses.Remove(SelectedUser);
+            Users.Remove(SelectedUser);
             SelectedUser = null;
         }
 
@@ -140,22 +148,31 @@ namespace Systems.ViewModels
         {
             if (OnAddUserCommandExecuted())
             {
-                if (SelectedUser.Entity.Id == 0)
-                    await _systemOperations.AddUserAsync(SelectedUser.Entity);
-                else
-                    await _systemOperations.UpdateUserAsync(SelectedUser.Entity);
+                User user = _systemOperations.GetByEmail(Registration.Email);
+                if (user is null)
+                {
+                    if (SelectedUser.Entity.Id == 0)
+                        await _systemOperations.AddUserAsync(SelectedUser.Entity);
+                    else
+                        await _systemOperations.UpdateUserAsync(SelectedUser.Entity);
 
-                await ReloadUsersAsync();
+                    await ReloadUsersAsync();
+                    MessageBox.Show("Success");
+                }
+                else
+                {
+                    MessageBox.Show("Email address is exists");
+                }
             }
         }
 
         private async Task ReloadUsersAsync()
         {
             var dbPreOrders = await _systemOperations.GetAllUsersAsync();
-            Userses.Clear();
+            Users.Clear();
 
             foreach (var preOrder in dbPreOrders)
-                Userses.Add(new UserEntity(preOrder));
+                Users.Add(new UserEntity(preOrder));
         }
     }
 }

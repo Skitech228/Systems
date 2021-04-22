@@ -40,6 +40,7 @@ namespace Systems.Operations.Realization
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public User GetByEmail(string email) => _context.Users.FirstOrDefault(x => x.Email == email);
         public async Task<User> GetByIdAsync(int id) => await _context.Users.FindAsync(id);
 
         public async Task<IEnumerable<User>> GetAllUsersAsync() => await _context.Users

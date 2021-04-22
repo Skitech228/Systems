@@ -17,6 +17,8 @@ namespace Systems.Operations.Intefases
 
          User GetSignInUser(string email, string password);
 
+         public User GetByEmail(string email);
+
          Task<IEnumerable<User>> GetAllUsersAsync();
     }
 }
