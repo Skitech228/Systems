@@ -33,15 +33,17 @@ namespace Systems.ViewModels.Pages
 
         private void OnNavigate()
         {
-            if (_ui == "View/LogInUI.xaml")
+            if (LoginUI=="Visible")
             {
-                UI = "View/RegistrationUI.xaml";
+                LoginUI = "Hidden";
+                RegistrationUI = "Visible";
                 RegistrationColor = new SolidColorBrush(Color.FromRgb(25, 188, 156));
                 LoginColor = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             }
             else
             {
-                UI = "View/LogInUI.xaml";
+                LoginUI = "Visible";
+                RegistrationUI = "Hidden";
                 LoginColor = new SolidColorBrush(Color.FromRgb(25, 188, 156));
                 RegistrationColor = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             }
@@ -89,32 +91,44 @@ namespace Systems.ViewModels.Pages
 
         #endregion
 
-        #region UI Property
-
-        private Page CurrentPage
-        {
-            get => _currentPage;
-            set => SetProperty(ref _currentPage, value);
-        }
+        #region LoginUI Property
 
         /// <summary>
         /// Private member backing variable for <see cref="UI" />
         /// </summary>
-        private string _ui = "View/LogInUI.xaml";
+        private string _loginui = "Visible";
 
         /// <summary>
         /// Gets and sets The property's value
         /// </summary>
-        public string UI
+        public string LoginUI
         {
             get
             {
-                if (_ui == null)
-                { _ui = String.Empty; }
-
-                return _ui;
+                return _loginui;
             }
-            set { SetProperty( ref _ui, value); }
+            set { SetProperty( ref _loginui, value); }
+        }
+
+        #endregion
+
+        #region RegistrationUI Property
+
+        /// <summary>
+        /// Private member backing variable for <see cref="RegistrationUI" />
+        /// </summary>
+        private string _registrationUI = "Hidden";
+
+        /// <summary>
+        /// Gets and sets The property's value
+        /// </summary>
+        public string RegistrationUI
+        {
+            get
+            {
+                return _registrationUI;
+            }
+            set { SetProperty(ref _registrationUI, value); }
         }
 
         #endregion
@@ -123,7 +137,6 @@ namespace Systems.ViewModels.Pages
         #region SystemOperationsContext Property
 
         LoginAndRegistrationViewModel _systemOperationsContext;
-        private Page _currentPage;
 
         public LoginAndRegistrationViewModel SystemOperationsContext
         {

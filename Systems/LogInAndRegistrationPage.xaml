@@ -221,8 +221,13 @@
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     FontSize="25" Foreground="{Binding LoginColor}" />
         </Grid>
-        <!--<GroupBox Style="{DynamicResource GroupBoxStyle1}" Grid.Row="2" Grid.ColumnSpan="5" 
-                  Grid.RowSpan="6" Margin="0,0,0,49">
+        <GroupBox 
+            Style="{DynamicResource GroupBoxStyle1}" 
+            Grid.Row="2"
+            Grid.ColumnSpan="5" 
+            Visibility="{Binding RegistrationUI}" 
+            Grid.RowSpan="6" 
+            Margin="0,0,0,49">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -242,8 +247,109 @@
                     Grid.ColumnSpan="4" Grid.RowSpan="6" 
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Fill="WhiteSmoke"
-                    Height="250" Width="400"
-                    RadiusX="10" RadiusY="10"/>
+                    Height="220" Width="500"
+                    RadiusX="50" RadiusY="50"/>
+                <Button Style="{DynamicResource ButtonStyle1}" Content="Registration"
+                        Grid.Column="1" Grid.Row="4"
+                        Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,20,0,0"
+                        Background="#19be9c" Foreground="White"
+                        FontSize="20"
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Height="35" Width="150"
+                        Command="{Binding SystemOperationsContext.ApplyUserChangesCommand, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Email"
+                         Grid.ColumnSpan="2" Grid.RowSpan="2"
+                         VerticalAlignment="Center" HorizontalAlignment="Center"
+                         Height="35" Width="175" 
+                         TextAlignment="Center"
+                         FontSize="25"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="Password Confirmation"
+                           Grid.ColumnSpan="3" Grid.RowSpan="2"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Height="25" Width="200"
+                           TextAlignment="Center"
+                           FontSize="19" />
+                <Border
+                    Grid.Column="0" Grid.Row="1"
+                    Grid.ColumnSpan="2" Grid.RowSpan="2"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    CornerRadius="10 10 10 10"
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    Background="White"
+                    Padding="3">
+                    <TextBox Style="{DynamicResource TextBoxStyle1}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                         Height="35" Width="175"
+                         FontSize="25"
+                         Text="{Binding SystemOperationsContext.Registration.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                </Border>
+                <Border
+                    Grid.Column="1" Grid.Row="2"
+                    Grid.ColumnSpan="3" Grid.RowSpan="2"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    CornerRadius="10 10 10 10"
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    Background="White"
+                    Padding="3">
+                    <TextBox Style="{DynamicResource TextBoxStyle1}" VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             Height="35" Width="175"
+                             FontSize="25"
+                             Text="{Binding SystemOperationsContext.Registration.ConfirmPassword, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                </Border>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Password"
+                           Grid.ColumnSpan="2" Grid.RowSpan="2"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Height="35" Width="175"
+                           TextAlignment="Center"
+                           FontSize="25" />
+                <Border
+                    Grid.Column="0" Grid.Row="3"
+                    Grid.ColumnSpan="2" Grid.RowSpan="2"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    CornerRadius="10 10 10 10"
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    Background="White"
+                    Padding="3">
+                    <TextBox VerticalAlignment="Center" HorizontalAlignment="Center"
+                         Height="35" Width="175"
+                         FontSize="25" Style="{DynamicResource TextBoxStyle1}"
+                         Text="{Binding SystemOperationsContext.Registration.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
+                </Border>
+            </Grid>
+            </GroupBox>
+        <GroupBox 
+            Grid.Row="2" 
+            Grid.Column="0"
+            Grid.ColumnSpan="5"
+            Grid.RowSpan="5"
+            BorderThickness="2"
+            Style="{DynamicResource GroupBoxStyle1}"
+            Visibility="{Binding LoginUI}"
+            >
+             <Grid>
+        <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Rectangle
+                    Grid.ColumnSpan="4" Grid.RowSpan="6" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Fill="WhiteSmoke"
+                    Height="230" Width="400"
+                    RadiusX="40" RadiusY="40"/>
                 <Button Style="{DynamicResource ButtonStyle1}" Content="Login"
                         Grid.Column="1" Grid.Row="4"
                         Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,20,0,0"
@@ -292,19 +398,7 @@
                          FontSize="25" Style="{DynamicResource TextBoxStyle1}"
                          Text="{Binding SystemOperationsContext.SighInUser.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
                 </Border>
-            </Grid>
-        </GroupBox>-->
-        <Frame 
-            
-            Grid.Row="2" 
-            Grid.Column="0"
-            Grid.ColumnSpan="5"
-            Grid.RowSpan="5"
-            BorderThickness="2"
-            Source="{Binding UI}"
-            NavigationUIVisibility="Hidden" JournalOwnership="OwnsJournal"
-        >
-            
-        </Frame>
+    </Grid>
+        </GroupBox>
     </Grid>
 </Window>
