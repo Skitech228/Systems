@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Systems.View
+namespace Systems.Views
 {
     /// <summary>
-    /// Логика взаимодействия для RegistrationUI.xaml
+    /// Логика взаимодействия для RegisteredUserPage.xaml
     /// </summary>
-    public partial class RegistrationUI : Page
+    public partial class RegisteredUserPage : Window
     {
-        public RegistrationUI()
+        public RegisteredUserPage()
         {
             InitializeComponent();
         }

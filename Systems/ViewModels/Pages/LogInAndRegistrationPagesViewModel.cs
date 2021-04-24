@@ -8,7 +8,6 @@ using System.Windows.Media;
 using Systems.Models;
 using Systems.Operations.Intefases;
 using Systems.Operations.Realization;
-using Systems.View;
 using Prism.Mvvm;
 using Systems.ViewModels;
 using Microsoft.EntityFrameworkCore;

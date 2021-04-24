@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Systems
+namespace Systems.Views
 {
     /// <summary>
-    /// Логика взаимодействия для LogInAndRegistrationPage.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class LogInAndRegistrationPage : Window
+    public partial class MainWindow : Window
     {
-        public LogInAndRegistrationPage()
+        public MainWindow()
         {
             InitializeComponent();
         }

@@ -4,9 +4,12 @@ using System.Windows;
 using Systems.Models;
 using Systems.Operations.Intefases;
 using Systems.Operations.Realization;
-using Systems.View;
 using Systems.ViewModels.Pages;
+using Systems.ViewModels.Windows;
+using Systems.Views;
+using Prism.Events;
 using Prism.Ioc;
+using Prism.Regions;
 using Prism.Unity;
 
 #endregion
@@ -29,11 +32,24 @@ namespace Systems
 
             containerRegistry.RegisterForNavigation<LogInAndRegistrationPage, LogInAndRegistrationPageViewModel>("AdministratorPage");
 
-            containerRegistry.RegisterForNavigation<LogInUI, LogInAndRegistrationPageViewModel>("LogInPage");
+            containerRegistry.RegisterForNavigation<RegisteredUserPage, RegisteredUserPageViewModel>("RegisteredUserPage");
 
-            containerRegistry.RegisterForNavigation<RegistrationUI, LogInAndRegistrationPageViewModel>("RegistrationPage");
+            containerRegistry.RegisterForNavigation<UnregisteredUserPage, UnregisteredUserPageViewModel>("UnregisteredUserPage");
+
+            containerRegistry.Register<MainWindow>(() => new MainWindow
+                                                         {
+                                                                 DataContext =
+                                                                         new MainWindowViewModel(Container
+                                                                                                         .Resolve<
+                                                                                                                 IRegionManager
+                                                                                                                 >(),
+                                                                                                 Container
+                                                                                                         .Resolve<
+                                                                                                                 IEventAggregator
+                                                                                                                 >())
+                                                         });
         }
-        protected override Window CreateShell() => Container.Resolve<LogInAndRegistrationPage>();
+        protected override Window CreateShell() => Container.Resolve<MainWindow>();
         #endregion
     }
 }

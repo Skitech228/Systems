@@ -10,20 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Systems.Operations.Intefases;
-using Systems.ViewModels;
-using Systems.ViewModels.Pages;
 
-namespace Systems.View
+namespace Systems.Views
 {
     /// <summary>
-    /// Логика взаимодействия для LogInUI.xaml
+    /// Логика взаимодействия для UnregisteredUserPage.xaml
     /// </summary>
-    public partial class LogInUI : Page
+    public partial class UnregisteredUserPage : Page
     {
-        public LogInUI()
+        public UnregisteredUserPage()
         {
             InitializeComponent();
         }
