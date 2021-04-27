@@ -21,16 +21,16 @@ namespace Systems.ViewModels.Windows
         public MainWindowViewModel(IRegionManager regionManager,
                                    IEventAggregator eventAggregator)
         {
-            _regionManager = regionManager;
-            _eventAggregator = eventAggregator;
+            //_regionManager = regionManager;
+            //_eventAggregator = eventAggregator;
 
-            _regionManager.RegisterViewWithRegion("Pages", () => ContainerLocator.Container.Resolve<LogInAndRegistrationPage>());
+            ////_regionManager.RegisterViewWithRegion("Pages", () => ContainerLocator.Container.Resolve<LogInAndRegistrationPage>());
 
-            _regionManager.RegisterViewWithRegion("Pages", () => ContainerLocator.Container.Resolve<RegisteredUserPage>());
+            ////_regionManager.RegisterViewWithRegion("Pages", () => ContainerLocator.Container.Resolve<RegisteredUserPage>());
 
-            _regionManager.RegisterViewWithRegion("Pages", () => ContainerLocator.Container.Resolve<UnregisteredUserPage>());
+            ////_regionManager.RegisterViewWithRegion("Pages", () => ContainerLocator.Container.Resolve<UnregisteredUserPage>());
 
-            regionManager.RequestNavigate("Pages", "UnregisteredUserPage");
+            //regionManager.RequestNavigate("Pages", "UnregisteredUserPage");
         }
     }
 }

@@ -2,6 +2,7 @@
 
 using System.Windows;
 using Systems.Models;
+using Systems.Models.Entitys;
 using Systems.Operations.Intefases;
 using Systems.Operations.Realization;
 using Systems.ViewModels.Pages;
@@ -36,6 +37,8 @@ namespace Systems
 
             containerRegistry.RegisterForNavigation<UnregisteredUserPage, UnregisteredUserPageViewModel>("UnregisteredUserPage");
 
+            containerRegistry.RegisterForNavigation<AdminPage, AdminPageViewModel>("AdminPage");
+
             containerRegistry.Register<MainWindow>(() => new MainWindow
                                                          {
                                                                  DataContext =
@@ -49,7 +52,7 @@ namespace Systems
                                                                                                                  >())
                                                          });
         }
-        protected override Window CreateShell() => Container.Resolve<MainWindow>();
+        protected override Window CreateShell() => Container.Resolve<AdminPage>();
         #endregion
     }
 }
