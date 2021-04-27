@@ -52,7 +52,7 @@ namespace Systems
                                                                                                                  >())
                                                          });
         }
-        protected override Window CreateShell() => Container.Resolve<AdminPage>();
+        protected override Window CreateShell() => Container.Resolve<UnregisteredUserPage>();
         #endregion
     }
 }
