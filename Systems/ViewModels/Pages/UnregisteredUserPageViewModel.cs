@@ -15,26 +15,6 @@ namespace Systems.ViewModels.Pages
 {
     class UnregisteredUserPageViewModel:BindableBase
     {
-        private MainWindowViewModel _mainWindowFrame;
-        public UnregisteredUserPageViewModel(MainWindowViewModel main)
-        {
-            _mainWindowFrame=main;
-        }
-
-        public MainWindowViewModel MainWindowFrame
-        {
-            get { return _mainWindowFrame; }
-
-            set { SetProperty(ref _mainWindowFrame, value); }
-        }
-
-        private DelegateCommand _openLoginOrRegistrationPage;
-
-        public DelegateCommand OpenLoginOrRegistrationPageCommand =>
-                _openLoginOrRegistrationPage ??= new DelegateCommand(OpenLoginOrRegistrationPage);
-
-        private void OpenLoginOrRegistrationPage()
-        {
-        }
+      
     }
 }

@@ -9,7 +9,7 @@ namespace Systems.Operations.Intefases
 {
     public interface ISystemOperations
     { 
-        Task<bool> AddUserAsync(User user);
+         Task<bool> AddUserAsync(User user);
 
          Task<bool> RemoveUserAsync(User customer);
 
@@ -17,7 +17,7 @@ namespace Systems.Operations.Intefases
 
          User GetSignInUser(string email, string password);
 
-         public User GetByEmail(string email);
+         User GetByEmail(string email);
 
          Task<IEnumerable<User>> GetAllUsersAsync();
     }
