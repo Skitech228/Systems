@@ -536,6 +536,44 @@ namespace Systems.ViewModels.Pages
                         TestDataPoints.Add(new DataPoint(x, y));
                     }
                 }
+
+                if (SelectedFunction == "a*x")
+                {
+                    string func = "";
+
+                    for (var x = -100d; x < 100; x += 0.1)
+                    {
+                        DataTable table = new DataTable();
+
+                        func = (Double.Parse(ValueLetterA) * x).ToString();
+
+                        func = func.Replace(",", ".");
+                        table.Columns.Add("expression", typeof(string), func);
+                        DataRow row = table.NewRow();
+                        table.Rows.Add(row);
+                        var y = (double.Parse((string)row["expression"]));
+                        TestDataPoints.Add(new DataPoint(x, y));
+                    }
+                }
+
+                if (SelectedFunction == "a/x")
+                {
+                    string func = "";
+
+                    for (var x = -100d; x < 100; x += 0.1)
+                    {
+                        DataTable table = new DataTable();
+
+                        func = (Double.Parse(ValueLetterA) / x).ToString();
+
+                        func = func.Replace(",", ".");
+                        table.Columns.Add("expression", typeof(string), func);
+                        DataRow row = table.NewRow();
+                        table.Rows.Add(row);
+                        var y = (double.Parse((string)row["expression"]));
+                        TestDataPoints.Add(new DataPoint(x, y));
+                    }
+                }
             }
             catch
             {

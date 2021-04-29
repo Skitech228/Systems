@@ -242,6 +242,8 @@
             </b:Interaction.Triggers>
             <ComboBoxItem Content="a*x^2+b*x+c"/>
             <ComboBoxItem Content="a*x+b"/>
+            <ComboBoxItem Content="a*x"/>
+            <ComboBoxItem Content="a/x" />
             <ComboBoxItem Content="a*x^3+b*x^2+c*x+d"/>
             <ComboBoxItem Content="a*x^2*n+b*x^n+c"/>
         </ComboBox>

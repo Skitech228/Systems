@@ -220,7 +220,7 @@
         <oxy:Plot Style="{DynamicResource PlotStyle1}"  Grid.Column="0" Grid.Row="1" 
                       Grid.ColumnSpan="3" Grid.RowSpan="4" 
                       HorizontalAlignment="Center" VerticalAlignment="Center"
-                      Width="400" Height="250">
+                      Width="400" Height="250" Background="#33487d">
             <oxy:LineSeries Color="#19be9c" />
         </oxy:Plot>
         <ComboBox Grid.Column="3" Grid.Row="1" Style="{DynamicResource ComboBoxFlatStyle}"
