@@ -41,6 +41,18 @@ namespace Systems.ViewModels.Pages
 
         #endregion
 
+        private PlotModel _plotMod;
+
+        public PlotModel PlotMod
+        {
+            get { return _plotMod; }
+            set
+            {
+                _plotMod = value;
+                SetProperty(ref _plotMod,value);
+            }
+        }
+
         #region ValueLetterA Property
 
         /// <summary>
@@ -396,12 +408,7 @@ namespace Systems.ViewModels.Pages
 
         private void OnCalculate()
         {
-            if ((ValueLetterA != "" && IsEnabledLetterA == "Visible") ||
-                (ValueLetterB != "" && IsEnabledLetterB == "Visible") ||
-                (ValueLetterC != "" && IsEnabledLetterC == "Visible") ||
-                (ValueLetterD != "" && IsEnabledLetterD == "Visible") ||
-                (ValueLetterN != "" && IsEnabledLetterN == "Visible") ||
-                (ValueLetterX != "" && IsEnabledLetterX == "Visible"))
+            try
             {
                 DataTable table = new DataTable();
                 double valuex = 0;
@@ -431,7 +438,7 @@ namespace Systems.ViewModels.Pages
                 IsEnabledResult = "Visible";
                 ValueResult =$"Value:{double.Parse((string)row["expression"]).ToString()}";
             }
-            else
+            catch
             {
                 IsEnabledResult = "Visible";
                 ValueResult = "Input values!";
@@ -447,50 +454,90 @@ namespace Systems.ViewModels.Pages
 
         private void OnGraphicBuild()
         {
-            if ((ValueLetterA != "" && IsEnabledLetterA == "Visible") ||
-                (ValueLetterB != "" && IsEnabledLetterB == "Visible") ||
-                (ValueLetterC != "" && IsEnabledLetterC == "Visible") ||
-                (ValueLetterD != "" && IsEnabledLetterD == "Visible") ||
-                (ValueLetterN != "" && IsEnabledLetterN == "Visible"))
+            try
             {
                 TestDataPoints=new List<DataPoint>();
                 const double to_rad = Math.PI / 180;
 
-                double valuex = 0;
-                if (ValueLetterX != "")
-                    valuex = Double.Parse(ValueLetterX);
-
-                double valuen = 0;
-
-                if (ValueLetterN != "")
-                    valuen = Double.Parse(ValueLetterN);
-
-                for (var x = 0d; x < 360; x += 1)
+                if (SelectedFunction == "a*x^2+b*x+c")
                 {
-                    DataTable table = new DataTable();
+                    string func="";
+                    for (var x = -100d; x < 100; x += 0.1)
+                    {
+                        DataTable table = new DataTable();
 
-                 string functi = SelectedFunction
-                        .Replace("a", ValueLetterA)
-                        .Replace("b", ValueLetterB)
-                        .Replace("c", ValueLetterC)
-                        .Replace("d", ValueLetterD)
-                        .Replace("x^3", Math.Pow(valuex, 3).ToString())
-                        .Replace("x^2*n", Math.Pow(valuex, 2 * valuen).ToString())
-                        .Replace("x^2", Math.Pow(valuex, 2).ToString())
-                        .Replace("x^n", Math.Pow(valuex, valuen).ToString())
-                        .Replace("x", x.ToString());
-
-
-                table.Columns.Add("expression", typeof(string), functi);
-                DataRow row = table.NewRow();
-                table.Rows.Add(row);
-                var y = double.Parse((string)row["expression"]);
-                TestDataPoints.Add(new DataPoint(x,y));
+                        func = $"{ValueLetterA}*{Math.Pow(x +Double.Parse(ValueLetterB)/(2*Double.Parse(ValueLetterA)) ,2)}+{(4 * Double.Parse(ValueLetterA) * Double.Parse(ValueLetterC) - Math.Pow(Double.Parse(ValueLetterB), 2)) / (4 * Double.Parse(ValueLetterA))}";
+                        func=func.Replace(",", ".");
+                        table.Columns.Add("expression", typeof(string), func);
+                        DataRow row = table.NewRow();
+                        table.Rows.Add(row);
+                        var y = (double.Parse((string)row["expression"]));
+                        TestDataPoints.Add(new DataPoint(x, y));
+                    }
                 }
 
-                int a=8;
+                if (SelectedFunction == "a*x+b")
+                {
+                    string func = "";
+
+                    for (var x = -100d; x < 100; x += 0.1)
+                    {
+                        DataTable table = new DataTable();
+
+                        func = (Double.Parse(ValueLetterA)*x+ Double.Parse(ValueLetterB)).ToString();
+                        func = func.Replace(",", ".");
+                        table.Columns.Add("expression", typeof(string), func);
+                        DataRow row = table.NewRow();
+                        table.Rows.Add(row);
+                        var y = (double.Parse((string)row["expression"]));
+                        TestDataPoints.Add(new DataPoint(x, y));
+                    }
+                }
+
+                if (SelectedFunction == "a*x^2*n+b*x^n+c")
+                {
+                    string func = "";
+
+                    for (var x = -100d; x < 100; x += 0.1)
+                    {
+                        DataTable table = new DataTable();
+
+                        func = (Double.Parse(ValueLetterA) * Math.Pow(x,2* Double.Parse(ValueLetterN)) + Double.Parse(ValueLetterB)* 
+                                Math.Pow(x, Double.Parse(ValueLetterN)) +
+                                Double.Parse(ValueLetterC)).ToString();
+                        func = func.Replace(",", ".");
+                        table.Columns.Add("expression", typeof(string), func);
+                        DataRow row = table.NewRow();
+                        table.Rows.Add(row);
+                        var y = (double.Parse((string)row["expression"]));
+                        TestDataPoints.Add(new DataPoint(x, y));
+                    }
+                }
+
+                if (SelectedFunction == "a*x^3+b*x^2+c*x+d")
+                {
+                    string func = "";
+
+                    for (var x = -100d; x < 100; x += 0.1)
+                    {
+                        DataTable table = new DataTable();
+
+                        func = (Double.Parse(ValueLetterA) * Math.Pow(x, 3) +
+                                Double.Parse(ValueLetterB) *
+                                Math.Pow(x, 2) +
+                                Double.Parse(ValueLetterC) * x +
+                                Double.Parse(ValueLetterD)).ToString();
+
+                        func = func.Replace(",", ".");
+                        table.Columns.Add("expression", typeof(string), func);
+                        DataRow row = table.NewRow();
+                        table.Rows.Add(row);
+                        var y = (double.Parse((string)row["expression"]));
+                        TestDataPoints.Add(new DataPoint(x, y));
+                    }
+                }
             }
-            else
+            catch
             {
                 IsEnabledResult = "Visible";
                 ValueResult = "Input values!";

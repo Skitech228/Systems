@@ -220,8 +220,14 @@
         <oxy:Plot Style="{DynamicResource PlotStyle1}"  Grid.Column="0" Grid.Row="1" 
                       Grid.ColumnSpan="3" Grid.RowSpan="4" 
                       HorizontalAlignment="Center" VerticalAlignment="Center"
-                      Width="400" Height="250" >
-            <oxy:LineSeries Color="#19be9c" ItemsSource="{Binding TestDataPoints}" />
+                      Width="400" Height="250" Background="#33487d" >
+            <oxy:LineSeries Color="#19be9c" ItemsSource="{Binding TestDataPoints}"/>
+            <oxy:Plot.Axes>
+                <oxy:LinearAxis AbsoluteMaximum="100" AbsoluteMinimum="-100"
+                                Position="Left" />
+                <oxy:LinearAxis AbsoluteMaximum="100" AbsoluteMinimum="-100"
+                                Position="Bottom" />
+            </oxy:Plot.Axes>
         </oxy:Plot>
         <ComboBox Grid.Column="3" Grid.Row="1" Style="{DynamicResource ComboBoxFlatStyle}"
                  Grid.ColumnSpan="2" Grid.RowSpan="2"
