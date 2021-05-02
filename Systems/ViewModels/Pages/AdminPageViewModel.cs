@@ -4,23 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Systems.Operations.Intefases;
+using Egor92.MvvmNavigation.Abstractions;
 using Prism.Mvvm;
 
 namespace Systems.ViewModels.Pages
 {
     class AdminPageViewModel :BindableBase
     {
-        private AdminViewModel _users;
+        private readonly INavigationManager _navigationManager;
 
-        public AdminPageViewModel(ISystemOperations user)
+        public AdminPageViewModel(INavigationManager navigationManager,
+                                  ISystemOperations salesService)
         {
-            UsersContext = new AdminViewModel(user);
+            _navigationManager = navigationManager;
+            UsersContext = new AdminViewModel(salesService);
         }
 
+        #region UsersContext Property
+
+        /// <summary>
+        /// Private member backing variable for <see cref="UsersContext" />
+        /// </summary>
+        private AdminViewModel _usersContext ;
+
+        /// <summary>
+        /// Gets and sets The property's value
+        /// </summary>
         public AdminViewModel UsersContext
         {
-            get => _users;
-            set { SetProperty(ref _users, value); }
+            get
+            {
+                return _usersContext;
+            }
+            set { SetProperty(ref _usersContext, value); }
         }
+
+        #endregion
+
     }
 }

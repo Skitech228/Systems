@@ -10,6 +10,7 @@ using Systems.Operations.Intefases;
 using Systems.Operations.Realization;
 using Prism.Mvvm;
 using Systems.ViewModels;
+using Egor92.MvvmNavigation.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Prism.Commands;
 
@@ -20,11 +21,20 @@ namespace Systems.ViewModels.Pages
 
         public LogInAndRegistrationPageViewModel(ISystemOperations _systemOperations,
                                                  SignInViewModel sign,
+                                                 INavigationManager navigationManager,
                                                  RegistrationViewModel registration)
         {
             SystemOperationsContext = new LoginAndRegistrationViewModel(_systemOperations,sign, registration);
+            _navigationManager = navigationManager;
         }
 
+        private readonly INavigationManager _navigationManager;
+
+        private void GoToSecondPage()
+        {
+            // Сменить интерфейс
+            _navigationManager.Navigate("SecondKey");
+        }
         #region Commands
 
         private DelegateCommand _navigationCommand;

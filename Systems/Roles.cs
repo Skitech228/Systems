@@ -8,7 +8,7 @@ namespace Systems
 {
     class Roles
     {
-        public const string Administrator = "Admin";
+        public const string Administrator = "UsersContext";
 
         public const string User = "User";
     }

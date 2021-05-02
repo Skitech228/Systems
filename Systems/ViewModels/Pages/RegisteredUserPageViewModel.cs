@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using Systems.Operations.Intefases;
 using CyberMath.Helpers;
+using Egor92.MvvmNavigation.Abstractions;
 using NCalc;
 using OxyPlot;
 using Prism.Commands;
@@ -18,6 +19,18 @@ namespace Systems.ViewModels.Pages
 {
     public class RegisteredUserPageViewModel:BindableBase
     {
+        private readonly INavigationManager _navigationManager;
+
+        public RegisteredUserPageViewModel(INavigationManager navigationManager)
+        {
+            _navigationManager = navigationManager;
+        }
+
+        private void GoToSecondPage()
+        {
+            // Сменить интерфейс
+            _navigationManager.Navigate("GoToSecondPageKey");
+        }
         #region Values
 
         #region ValueLetterA Property
@@ -397,7 +410,10 @@ namespace Systems.ViewModels.Pages
 
         public DelegateCommand OpenLoginOrRegistrationPageCommand => _openLoginOrRegistrationPage ??= new DelegateCommand(OpenLoginOrRegistrationPage);
 
-        private void OpenLoginOrRegistrationPage() { }
+        private void OpenLoginOrRegistrationPage()
+        {
+            _navigationManager.Navigate("LogInAndRegistrationKey");
+        }
 
         #endregion
 
@@ -447,7 +463,7 @@ namespace Systems.ViewModels.Pages
 
         #endregion
 
-        #region OnCalculateCommand
+        #region OnGraphicBuildCommand
 
         private DelegateCommand _onGraphicBuild;
         public DelegateCommand OnGraphicBuildCommand => _onGraphicBuild ??= new DelegateCommand(OnGraphicBuild);

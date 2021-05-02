@@ -17,7 +17,7 @@ namespace Systems.Views
     /// <summary>
     /// Логика взаимодействия для RegisteredUserPage.xaml
     /// </summary>
-    public partial class RegisteredUserPage : Window
+    public partial class RegisteredUserPage : Page
     {
         public RegisteredUserPage()
         {

@@ -17,7 +17,7 @@ namespace Systems.Views
     /// <summary>
     /// Логика взаимодействия для LogInAndRegistrationPage.xaml
     /// </summary>
-    public partial class LogInAndRegistrationPage : Window
+    public partial class LogInAndRegistrationPage : Page
     {
         public LogInAndRegistrationPage()
         {

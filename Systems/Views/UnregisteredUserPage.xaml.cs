@@ -17,7 +17,7 @@ namespace Systems.Views
     /// <summary>
     /// Логика взаимодействия для UnregisteredUserPage.xaml
     /// </summary>
-    public partial class UnregisteredUserPage : Window
+    public partial class UnregisteredUserPage : Page
     {
         public UnregisteredUserPage()
         {

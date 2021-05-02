@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Navigation;
 using Systems.ViewModels.Pages;
 using Systems.Views;
+using Egor92.MvvmNavigation.Abstractions;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Ioc;
@@ -13,24 +18,15 @@ using Prism.Regions;
 
 namespace Systems.ViewModels.Windows
 {
-    class MainWindowViewModel:BindableBase
+    public class MainWindowViewModel:BindableBase
     {
-        private readonly IEventAggregator _eventAggregator;
-        private readonly IRegionManager _regionManager;
 
-        public MainWindowViewModel(IRegionManager regionManager,
-                                   IEventAggregator eventAggregator)
+        private readonly INavigationManager _navigationManager;
+
+        public MainWindowViewModel(INavigationManager navigationManager)
         {
-            //_regionManager = regionManager;
-            //_eventAggregator = eventAggregator;
-
-            ////_regionManager.RegisterViewWithRegion("Pages", () => ContainerLocator.Container.Resolve<LogInAndRegistrationPage>());
-
-            ////_regionManager.RegisterViewWithRegion("Pages", () => ContainerLocator.Container.Resolve<RegisteredUserPage>());
-
-            ////_regionManager.RegisterViewWithRegion("Pages", () => ContainerLocator.Container.Resolve<UnregisteredUserPage>());
-
-            //regionManager.RequestNavigate("Pages", "UnregisteredUserPage");
+            _navigationManager = navigationManager;
         }
+
     }
 }

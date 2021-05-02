@@ -9,6 +9,7 @@ using Systems.Operations.Intefases;
 using Prism.Commands;
 using Prism.Mvvm;
 using Systems.AsyncCommands;
+using Egor92.MvvmNavigation.Abstractions;
 
 namespace Systems.ViewModels
 {
@@ -41,6 +42,17 @@ namespace Systems.ViewModels
                     .Wait();
         }
 
+        public LoginAndRegistrationViewModel(INavigationManager navigationManager)
+        {
+            _navigationManager = navigationManager;
+        }
+        private readonly INavigationManager _navigationManager;
+
+        private void GoToSecondPage()
+        {
+            // Сменить интерфейс
+            _navigationManager.Navigate("SecondKey");
+        }
         //public DelegateCommand AddUserCommand => _addUserCommand ??= new DelegateCommand(OnAddUserCommandExecuted);
         public DelegateCommand SignInCommand => _signInUserCommand ??= new DelegateCommand(OnSignInCommandExecuted);
         public DelegateCommand NavigationCommand => _navigationCommand ??= new DelegateCommand(OnSignInCommandExecuted);
@@ -100,7 +112,7 @@ namespace Systems.ViewModels
             else
             {
                 MessageBox.Show("Passwords don't match");
-
+                _navigationManager.Navigate("RegisteredUserKey");
                 return false;
             }
         }
