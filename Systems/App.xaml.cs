@@ -22,65 +22,44 @@ using Prism.Unity;
 
 namespace Systems
 {
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
-        //#region Overrides of PrismApplicationBase
+        #region Overrides of PrismApplicationBase
 
-        /// <inheritdoc />
-        protected override void OnStartup(StartupEventArgs e)
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            var window = new MainWindow();
+            containerRegistry.RegisterSingleton<ServiceContext>(() =>
+                                                                {
+                                                                    var context = new ServiceContext();
 
-            //1. Создайте менеджер навигации
-            var navigationManager = new NavigationManager(window);
+                                                                    return context;
+                                                                });
 
+            containerRegistry.RegisterScoped<ISystemOperations, SystemOperations>();
 
-            //2. Определите правила навигации: зарегистрируйте ключ (строку) с соответствующими View и ViewModel для него
-            navigationManager.Register<LogInAndRegistrationPage>("LogInAndRegistrationKey", () => new LogInAndRegistrationPageViewModel(navigationManager));
-            navigationManager.Register<AdminPage>("AdminKey", () => new AdminPageViewModel(navigationManager));
-            navigationManager.Register<RegisteredUserPage>("RegisteredUserKey", () => new RegisteredUserPageViewModel(navigationManager));
-            navigationManager.Register<UnregisteredUserPage>("UnregisteredUserKey", () => new UnregisteredUserPageViewModel(navigationManager));
+            containerRegistry.RegisterForNavigation<LogInAndRegistrationPage, LogInAndRegistrationPageViewModel>("LogInPage");
 
-            //3. Отобразите стартовый UI
-            navigationManager.Navigate("AdminKey");
+            containerRegistry.RegisterForNavigation<AdminPage, AdminPageViewModel>("AdminPage");
 
-            window.Show();
+            containerRegistry.RegisterForNavigation<RegisteredUserPage, RegisteredUserPageViewModel>("RegisteredUserPage");
+
+            containerRegistry.RegisterForNavigation<UnregisteredUserPage, UnregisteredUserPageViewModel>("UnregisteredUserPage");
+
+            containerRegistry.RegisterForNavigation<MainWindow, MainWindowViewModel>("MainWindow");
+            //containerRegistry.Register<MainWindow>(() => new MainWindow
+            //                                             {
+            //                                                     DataContext =
+            //                                                             new MainWindowViewModel(Container
+            //                                                                                             .Resolve<
+            //                                                                                                     IRegionManager
+            //                                                                                                     >(),
+            //                                                                                     Container
+            //                                                                                             .Resolve<
+            //                                                                                                     IEventAggregator
+            //                                                                                                     >())
+            //                                             });
         }
-
-        //protected override void RegisterTypes(IContainerRegistry containerRegistry)
-        //{ 
-        //    containerRegistry.RegisterSingleton<ServiceContext>(() =>
-        //                                                        {
-        //                                                            var context = new ServiceContext();
-
-        //                                                            return context;
-        //                                                        });
-
-        //    containerRegistry.RegisterScoped<ISystemOperations, SystemOperations>();
-
-        //    containerRegistry.RegisterForNavigation<LogInAndRegistrationPage, LogInAndRegistrationPageViewModel>("LogInPage");
-
-        //    containerRegistry.RegisterForNavigation<AdminPage, AdminPageViewModel>("AdminPage");
-
-        //    containerRegistry.RegisterForNavigation<RegisteredUserPage, RegisteredUserPageViewModel>("RegisteredUserPage");
-
-        //    containerRegistry.RegisterForNavigation<UnregisteredUserPage, UnregisteredUserPageViewModel>("UnregisteredUserPage");
-
-        //    containerRegistry.RegisterForNavigation<MainWindow, MainWindowViewModel>("MainWindow");
-        //    //containerRegistry.Register<MainWindow>(() => new MainWindow
-        //    //                                             {
-        //    //                                                     DataContext =
-        //    //                                                             new MainWindowViewModel(Container
-        //    //                                                                                             .Resolve<
-        //    //                                                                                                     IRegionManager
-        //    //                                                                                                     >(),
-        //    //                                                                                     Container
-        //    //                                                                                             .Resolve<
-        //    //                                                                                                     IEventAggregator
-        //    //                                                                                                     >())
-        //    //                                             });
-        //}
-        //protected override Window CreateShell() => Container.Resolve<MainWindow>();
-        //#endregion
+        protected override Window CreateShell() => Container.Resolve<MainWindow>();
+        #endregion
     }
 }

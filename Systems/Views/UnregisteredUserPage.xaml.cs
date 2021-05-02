@@ -23,5 +23,11 @@ namespace Systems.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //new MainWindow().Frame1.Source = new Uri(@"Views\LogInAndRegistrationPage.xaml",
+            //                                         System.UriKind.RelativeOrAbsolute);
+        }
     }
 }

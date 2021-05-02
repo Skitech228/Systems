@@ -9,7 +9,7 @@ using Systems.Operations.Intefases;
 using Prism.Commands;
 using Prism.Mvvm;
 using Systems.AsyncCommands;
-using Egor92.MvvmNavigation.Abstractions;
+using Systems.Views;
 
 namespace Systems.ViewModels
 {
@@ -42,17 +42,6 @@ namespace Systems.ViewModels
                     .Wait();
         }
 
-        public LoginAndRegistrationViewModel(INavigationManager navigationManager)
-        {
-            _navigationManager = navigationManager;
-        }
-        private readonly INavigationManager _navigationManager;
-
-        private void GoToSecondPage()
-        {
-            // Сменить интерфейс
-            _navigationManager.Navigate("SecondKey");
-        }
         //public DelegateCommand AddUserCommand => _addUserCommand ??= new DelegateCommand(OnAddUserCommandExecuted);
         public DelegateCommand SignInCommand => _signInUserCommand ??= new DelegateCommand(OnSignInCommandExecuted);
         public DelegateCommand NavigationCommand => _navigationCommand ??= new DelegateCommand(OnSignInCommandExecuted);
@@ -112,7 +101,6 @@ namespace Systems.ViewModels
             else
             {
                 MessageBox.Show("Passwords don't match");
-                _navigationManager.Navigate("RegisteredUserKey");
                 return false;
             }
         }
@@ -143,6 +131,33 @@ namespace Systems.ViewModels
             else
             {
                 MessageBox.Show("Success");
+                System.Threading.Thread.Sleep(1000);
+
+                if (user.Email == "admin@gmail.com" &&
+                    user.Password == "12345")
+                {
+                    var frame = new MainWindow();
+
+                    frame.Frame1.Source = new Uri(@"AdminPage.xaml",
+                                                  System.UriKind.RelativeOrAbsolute);
+
+                    foreach (Window w in App.Current.Windows)
+                        w.Hide();
+
+                    frame.Show();
+                }
+                else
+                {
+                    var frame = new MainWindow();
+
+                    frame.Frame1.Source = new Uri(@"RegisteredUserPage.xaml",
+                                                  System.UriKind.RelativeOrAbsolute);
+
+                    foreach (Window w in App.Current.Windows)
+                        w.Hide();
+
+                    frame.Show();
+                }
             }
         }
 

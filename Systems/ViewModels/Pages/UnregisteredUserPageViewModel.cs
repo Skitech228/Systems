@@ -17,8 +17,6 @@ namespace Systems.ViewModels.Pages
     class UnregisteredUserPageViewModel:BindableBase
     {
 
-        #region MainWindowContext Property
-
         /// <summary>
         /// Private member backing variable for <see cref="MainWindowContext" />
         /// </summary>
@@ -36,26 +34,22 @@ namespace Systems.ViewModels.Pages
             set { SetProperty(ref _mainWindowContext, value); }
         }
 
-        #endregion
-
-        private readonly INavigationManager _navigationManager;
-
-        public UnregisteredUserPageViewModel(INavigationManager navigationManager)
-        {
-            _navigationManager = navigationManager;
-        }
-
-        private void GoToSecondPage()
-        {
-            // Сменить интерфейс
-            _navigationManager.Navigate("LogInAndRegistrationKey");
-        }
         #region OpenLoginOrRegistrationPageCommand
 
         private DelegateCommand _openLoginOrRegistrationPage;
 
-        public DelegateCommand OpenLoginOrRegistrationPageCommand =>
-                _openLoginOrRegistrationPage ??= new DelegateCommand(GoToSecondPage);
+        public DelegateCommand OpenLoginOrRegistrationPageCommand => _openLoginOrRegistrationPage ??= new DelegateCommand(ToAytorization);
+
+        private void ToAytorization()
+        {
+            var frame = new MainWindow();
+            frame.Frame1.Source = new Uri(@"LogInAndRegistrationPage.xaml",
+                                                     System.UriKind.RelativeOrAbsolute);
+
+            foreach (Window w in App.Current.Windows)
+                w.Hide();
+            frame.Show();
+        }
 
         #endregion
     }

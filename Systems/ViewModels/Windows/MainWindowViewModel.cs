@@ -20,13 +20,5 @@ namespace Systems.ViewModels.Windows
 {
     public class MainWindowViewModel:BindableBase
     {
-
-        private readonly INavigationManager _navigationManager;
-
-        public MainWindowViewModel(INavigationManager navigationManager)
-        {
-            _navigationManager = navigationManager;
-        }
-
     }
 }

@@ -4,8 +4,10 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 using Systems.Operations.Intefases;
+using Systems.Views;
 using CyberMath.Helpers;
 using Egor92.MvvmNavigation.Abstractions;
 using NCalc;
@@ -19,18 +21,6 @@ namespace Systems.ViewModels.Pages
 {
     public class RegisteredUserPageViewModel:BindableBase
     {
-        private readonly INavigationManager _navigationManager;
-
-        public RegisteredUserPageViewModel(INavigationManager navigationManager)
-        {
-            _navigationManager = navigationManager;
-        }
-
-        private void GoToSecondPage()
-        {
-            // Сменить интерфейс
-            _navigationManager.Navigate("GoToSecondPageKey");
-        }
         #region Values
 
         #region ValueLetterA Property
@@ -412,7 +402,15 @@ namespace Systems.ViewModels.Pages
 
         private void OpenLoginOrRegistrationPage()
         {
-            _navigationManager.Navigate("LogInAndRegistrationKey");
+            var frame = new MainWindow();
+
+            frame.Frame1.Source = new Uri(@"LogInAndRegistrationPage.xaml",
+                                          System.UriKind.RelativeOrAbsolute);
+
+            foreach (Window w in App.Current.Windows)
+                w.Hide();
+
+            frame.Show();
         }
 
         #endregion

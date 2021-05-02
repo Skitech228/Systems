@@ -23,5 +23,10 @@ namespace Systems.Views
         {
             InitializeComponent();
         }
+
+        private void RegisteredUserPage_OnContextMenuClosing(object sender, ContextMenuEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

@@ -6,7 +6,16 @@
         xmlns:local="clr-namespace:Systems"
         xmlns:regions="http://prismlibrary.com/"
         mc:Ignorable="d"
-        Title="" Height="450" Width="800">
+        Title="" Height="480" Width="800" 
+        Closing="MainWindow_OnClosing"
+        MaxWidth="800"
+        MaxHeight="480"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Normal"
+        WindowStyle="SingleBorderWindow">
     <Grid>
+        <Grid.ColumnDefinitions><ColumnDefinition/></Grid.ColumnDefinitions>
+        <Grid.RowDefinitions><RowDefinition/></Grid.RowDefinitions>
+        <Frame x:Name="Frame1" x:FieldModifier="public" Grid.Row="0" Grid.Column="0" Source="UnregisteredUserPage.xaml" NavigationUIVisibility="Hidden" ></Frame>
     </Grid>
 </Window>

@@ -249,7 +249,7 @@
                     Grid.ColumnSpan="4" Grid.RowSpan="6" 
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Fill="WhiteSmoke"
-                    Height="220" Width="500"
+                    Height="250" Width="600"
                     RadiusX="50" RadiusY="50"/>
                 <Button Style="{DynamicResource ButtonStyle1}" Content="Registration"
                         Grid.Column="1" Grid.Row="4"
@@ -297,7 +297,7 @@
                     <TextBox Style="{DynamicResource TextBoxStyle1}" VerticalAlignment="Center"
                              HorizontalAlignment="Center"
                              Height="35" Width="175"
-                             FontSize="25"
+                             FontSize="25" FontFamily="pack://application:,,,/Resources/#password"
                              Text="{Binding SystemOperationsContext.Registration.ConfirmPassword, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                 </Border>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Password"
@@ -350,7 +350,7 @@
                     Grid.ColumnSpan="4" Grid.RowSpan="6" 
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Fill="WhiteSmoke"
-                    Height="230" Width="400"
+                    Height="280" Width="500"
                     RadiusX="40" RadiusY="40"/>
                 <Button Style="{DynamicResource ButtonStyle1}" Content="Login"
                         Grid.Column="1" Grid.Row="4"
@@ -398,6 +398,7 @@
                     <TextBox VerticalAlignment="Center" HorizontalAlignment="Center"
                          Height="35" Width="175"
                          FontSize="25" Style="{DynamicResource TextBoxStyle1}"
+                         FontFamily="pack://application:,,,/Resources/#password"
                          Text="{Binding SystemOperationsContext.SighInUser.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"/>
                 </Border>
     </Grid>

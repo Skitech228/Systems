@@ -11,12 +11,9 @@ namespace Systems.ViewModels.Pages
 {
     class AdminPageViewModel :BindableBase
     {
-        private readonly INavigationManager _navigationManager;
 
-        public AdminPageViewModel(INavigationManager navigationManager,
-                                  ISystemOperations salesService)
+        public AdminPageViewModel(ISystemOperations salesService)
         {
-            _navigationManager = navigationManager;
             UsersContext = new AdminViewModel(salesService);
         }
 
