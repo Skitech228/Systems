@@ -12,7 +12,8 @@
         MaxHeight="480"
         WindowStartupLocation="CenterScreen"
         WindowState="Normal"
-        WindowStyle="SingleBorderWindow">
+        WindowStyle="SingleBorderWindow"
+        MinWidth="800" MinHeight="480">
     <Grid>
         <Grid.ColumnDefinitions><ColumnDefinition/></Grid.ColumnDefinitions>
         <Grid.RowDefinitions><RowDefinition/></Grid.RowDefinitions>
